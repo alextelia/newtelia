@@ -1,0 +1,22 @@
+FROM ${dockerRegistry}/telia-debian-buster-python:latest
+LABEL maintainer="${developerTeam}"
+
+COPY --chown=2000:2000 requirements.txt /tmp/
+
+RUN export ALL_PROXY="http://proxy-fi.ddc.teliasonera.net:8080" \
+ && pip install --no-cache-dir -r /tmp/requirements.txt \
+ && unset ALL_PROXY
+
+#ENV LD_LIBRARY_PATH="/opt/oracle/instantclient_19_9:${LD_LIBRARY_PATH}"
+
+COPY --chown=2000:2000 ./scripts/start-dev.sh /start.sh
+RUN chmod +x /start.sh && \
+    mkdir /app
+
+COPY --chown=2000:2000 ./app /app
+
+WORKDIR /
+
+EXPOSE 8080
+
+CMD ["/start.sh"]
