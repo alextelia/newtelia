@@ -18,4 +18,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag alexander.christudhasan@teliacompany.com/docker-image-autobuild:latest
     - name: Push the Docker image
-      run: Jfrog login -u alexander.christudhasan@teliacompany.com -p ${{ secrets.PASSWORD }} && docker push alexander.christudhasan@teliacompany.com/docker-image-autobuild:latest
+      run: docker login -u alexander.christudhasan@teliacompany.com -p ${{ secrets.PASSWORD }} && docker push alexander.christudhasan@teliacompany.com/docker-image-autobuild:latest
