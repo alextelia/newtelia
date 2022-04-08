@@ -16,4 +16,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag 1/docker-image-autobuild:latest
+      run: docker build . --file Dockerfile --tag latest/docker-image-autobuild:latest
