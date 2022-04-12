@@ -1,19 +1,14 @@
-name: Docker Image CI
+FROM edhub-docker-snapshot-local.jfrog.teliacompany.io/edhub-base/python/${python_ver}/telia-debian-buster-python:latest
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch: 
 
-jobs:
+Build Base Image ()
 
-  build:
 
-    runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag latest/docker-image-autobuild:latest
+docker login edhub-docker-snapshot-local.jfrog.teliacompany.io
+
+
+docker tag base image edhub-docker-snapshot-local.jfrog.teliacompany.io/edhub-base/python/${python_ver}/telia-debian-buster-python:latest
+
+
+docker push edhub-docker-snapshot-local.jfrog.teliacompany.io/edhub-base/python/${python_ver}/telia-debian-buster-python:latest
